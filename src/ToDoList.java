@@ -4,9 +4,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Objects;
 
 public class ToDoList extends JFrame {
     private JPanel jpanel;
@@ -165,6 +164,10 @@ public class ToDoList extends JFrame {
                     tasks.add(task);
                 }
             }
+            Collections.sort(tasks);
+            for(YourTaskClass t : tasks) {
+                updateTaskDisplay(t.getTaskName(),t.getTaskDate());
+            }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error loading tasks from file.");
         }
@@ -215,15 +218,31 @@ public class ToDoList extends JFrame {
         });
     }
 
-    public static class YourTaskClass {
+    public static class YourTaskClass implements Comparable<YourTaskClass> {
         private String taskName;
         private String taskDescription;
         private String taskDate;
+        private int intTaskDate;
 
         public YourTaskClass(String taskName, String taskDescription, String taskDate) {
             this.taskName = taskName;
             this.taskDescription = taskDescription;
             this.taskDate = taskDate;
+            setIntTaskDate();
+        }
+
+        public void setIntTaskDate() {
+            String[] date = taskDate.split(" - ");
+//            System.out.println("d: " + date[0] + "m: " + date[1] + "y: " + date[2]);
+            int day = Integer.parseInt(date[0]);
+            int month = Integer.parseInt(date[1]);
+            int year = Integer.parseInt(date[2]);
+
+            intTaskDate = (year*10000)+(month*100)+(day);
+        }
+
+        public int getIntTaskDate() {
+            return intTaskDate;
         }
 
         public String getTaskName() {
@@ -254,5 +273,10 @@ public class ToDoList extends JFrame {
         public String toString() {
             return taskName;
         }
+        @Override
+        public int compareTo(YourTaskClass o) {
+            return Integer.compare(this.getIntTaskDate(), o.getIntTaskDate());
+        }
+
     }
 }
