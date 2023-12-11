@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.Objects;
 
-public class TaskCreator extends JFrame {
-    private static ToDoList.YourTaskClass task;
+public class TaskCreator extends ToDoList {
+    private static YourTaskClass task;
     private JPanel jpanel;
     private JTextField taskTitleField;
     private JComboBox daysBox;
@@ -37,7 +37,7 @@ public class TaskCreator extends JFrame {
                 try {
                     int selectedDay = Integer.parseInt(Objects.requireNonNull(daysBox.getSelectedItem()).toString());
                     int selectedYear = Integer.parseInt(Objects.requireNonNull(yearsBox.getSelectedItem()).toString());
-                    int selectedMonth = monthsBox.getSelectedIndex() + 1;  // Add 1 to get the correct month
+                    int selectedMonth = monthsBox.getSelectedIndex();  // Add 1 to get the correct month
                     String taskDate = String.format("%02d - %02d - %d", selectedDay, selectedMonth, selectedYear);
                     String taskTitleText = taskTitleField.getText().trim();
                     String taskDescriptionText = taskDescriptionArea.getText().trim();
@@ -49,11 +49,11 @@ public class TaskCreator extends JFrame {
                     } else if (taskDescriptionText.isEmpty()) {
                         JOptionPane.showMessageDialog(create, "Please enter task description.");
                     } else {
-                        task = new ToDoList.YourTaskClass(taskTitleText, taskDescriptionText.replace("\n", ";"), taskDate);
+                        task = new YourTaskClass(taskTitleText, taskDescriptionText.replace("\n", ";"), taskDate);
                         saveTaskToFile(task);
                         ToDoList.tasks.add(task);
 
-                        toDoList.updateTaskDisplay(taskTitleText, taskDate);
+                        updateTaskDisplay(taskTitleText, taskDate);
                     }
                     dispose();
 
@@ -76,14 +76,14 @@ public class TaskCreator extends JFrame {
         clearAllButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                clearMemory();
+                clearMemory(taskTitleField, taskDescriptionArea, monthsBox, daysBox, yearsBox);
             }
         });
 
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                clearMemory();
+                clearMemory(taskTitleField, taskDescriptionArea, monthsBox, daysBox, yearsBox);
                 dispose();
 
                 ToDoList taskEase = new ToDoList();
@@ -100,29 +100,21 @@ public class TaskCreator extends JFrame {
         });
     }
 
-    public static ToDoList.YourTaskClass getTask() {
+    public static YourTaskClass getTask() {
         return task;
     }
 
-    public static void setTask(ToDoList.YourTaskClass task) {
-        TaskCreator.task = task;
+    public static void setTask(YourTaskClass task) {
+        task = task;
     }
 
-    private void saveTaskToFile(ToDoList.YourTaskClass task) {
+    private void saveTaskToFile(YourTaskClass task) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("tasks.txt", true))) {
             writer.write(task.getTaskName() + "|" + task.getTaskDescription() + "|" + task.getTaskDate());
             writer.newLine();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error saving task to file.");
         }
-    }
-
-     public void clearMemory() {
-        taskTitleField.setText("");
-        taskDescriptionArea.setText("");
-        daysBox.setSelectedIndex(0);
-        monthsBox.setSelectedIndex(0);
-        yearsBox.setSelectedIndex(0);
     }
 
     public static void main(String[] args) {

@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class TaskOpener extends JFrame {
+public class TaskOpener extends ToDoList {
     private JTextField taskTitleField;
     private JComboBox daysBox;
     private JComboBox monthsBox;
@@ -18,7 +18,7 @@ public class TaskOpener extends JFrame {
     private JPanel jpanel;
     private JLabel taskDescription;
 
-    public TaskOpener(ToDoList.YourTaskClass task, ToDoList parentFrame) {
+    public TaskOpener(YourTaskClass task, ToDoList parentFrame) {
         setContentPane(jpanel);
 
         Border border = BorderFactory.createLineBorder(Color.BLACK);
@@ -105,7 +105,7 @@ public class TaskOpener extends JFrame {
         closeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                clearMemory();
+                clearMemory(taskTitleField, taskDescriptionArea, monthsBox, daysBox, yearsBox);
                 dispose();
 
                 ToDoList taskEase = new ToDoList();
@@ -122,18 +122,10 @@ public class TaskOpener extends JFrame {
         });
     }
 
-    private void clearMemory() {
-        taskTitleField.setText("");
-        taskDescriptionArea.setText("");
-        daysBox.setSelectedIndex(0);
-        monthsBox.setSelectedIndex(0);
-        yearsBox.setSelectedIndex(0);
-    }
-
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                ToDoList.YourTaskClass dummyTask = new ToDoList.YourTaskClass("Dummy Task", "Dummy Description", "01 - 01 - 2023");
+                YourTaskClass dummyTask = new YourTaskClass("Dummy Task", "Dummy Description", "01 - 01 - 2023");
                 ToDoList parentFrame = new ToDoList();
 
                 TaskOpener OpenFile = new TaskOpener(dummyTask, parentFrame);
