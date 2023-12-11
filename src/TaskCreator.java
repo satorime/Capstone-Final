@@ -21,7 +21,6 @@ public class TaskCreator extends JFrame {
     private JLabel taskDescription;
     private JButton cancelButton;
     private JTextArea taskDescriptionArea;
-    private JTextArea displayArea;
 
     public TaskCreator(ToDoList toDoList) {
         TaskCreator create = this;
@@ -31,7 +30,6 @@ public class TaskCreator extends JFrame {
         Border compoundBorder = BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(5, 5, 5, 5));
         taskTitleField.setBorder(compoundBorder);
         taskDescriptionArea.setBorder(compoundBorder);
-        displayArea.setBorder(compoundBorder);
 
         createTaskButton.addActionListener(new ActionListener() {
             @Override
@@ -51,17 +49,17 @@ public class TaskCreator extends JFrame {
                     } else if (taskDescriptionText.isEmpty()) {
                         JOptionPane.showMessageDialog(create, "Please enter task description.");
                     } else {
-                        task = new ToDoList.YourTaskClass(taskTitleText, taskDescriptionText, taskDate);
+                        task = new ToDoList.YourTaskClass(taskTitleText, taskDescriptionText.replace("\n", ";"), taskDate);
                         saveTaskToFile(task);
                         ToDoList.tasks.add(task);
 
-                        // Make sure this method adds the task to the ToDoList display
                         toDoList.updateTaskDisplay(taskTitleText, taskDate);
                     }
                     dispose();
+
                     ToDoList taskEase = new ToDoList();
-                    taskEase.setSize(650, 750);
-                    taskEase.setTitle("TaskEase");
+                    taskEase.setSize(460, 545);
+                    taskEase.setTitle("TaskEase - Main");
                     taskEase.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     taskEase.setVisible(true);
 
@@ -89,8 +87,8 @@ public class TaskCreator extends JFrame {
                 dispose();
 
                 ToDoList taskEase = new ToDoList();
-                taskEase.setSize(650, 750);
-                taskEase.setTitle("TaskEase");
+                taskEase.setSize(460, 545);
+                taskEase.setTitle("TaskEase - Main");
                 taskEase.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 taskEase.setVisible(true);
 
@@ -112,14 +110,14 @@ public class TaskCreator extends JFrame {
 
     private void saveTaskToFile(ToDoList.YourTaskClass task) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("tasks.txt", true))) {
-            writer.write(task.getTaskName() + "," + task.getTaskDescription() + "," + task.getTaskDate());
+            writer.write(task.getTaskName() + "|" + task.getTaskDescription() + "|" + task.getTaskDate());
             writer.newLine();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error saving task to file.");
         }
     }
 
-    private void clearMemory() {
+     public void clearMemory() {
         taskTitleField.setText("");
         taskDescriptionArea.setText("");
         daysBox.setSelectedIndex(0);
@@ -132,8 +130,8 @@ public class TaskCreator extends JFrame {
             public void run() {
                 ToDoList taskEase = new ToDoList();
                 TaskCreator createTask = new TaskCreator(taskEase);
-                createTask.setSize(500, 650);
-                createTask.setTitle("TaskEase");
+                createTask.setSize(480, 470);
+                createTask.setTitle("TaskEase - Task Creator");
                 createTask.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 createTask.setVisible(true);
 

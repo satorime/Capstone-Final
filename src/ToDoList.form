@@ -2,9 +2,11 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="ToDoList">
   <grid id="27dc6" binding="jpanel" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="20" y="37" width="506" height="233"/>
+      <xy x="20" y="37" width="506" height="231"/>
     </constraints>
-    <properties/>
+    <properties>
+      <preferredSize width="450" height="540"/>
+    </properties>
     <clientProperties>
       <html.disable class="java.lang.Boolean" value="false"/>
     </clientProperties>
@@ -65,7 +67,7 @@
           </vspacer>
           <component id="4eaa4" class="javax.swing.JLabel" binding="taskTitle">
             <constraints>
-              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
@@ -76,7 +78,7 @@
           </component>
           <component id="bf49c" class="javax.swing.JLabel" binding="dateCreated">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
@@ -98,20 +100,24 @@
             </constraints>
             <properties>
               <autoscrolls value="false"/>
+              <font name="JetBrains Mono" size="12" style="0"/>
               <opaque value="true"/>
-              <preferredSize width="266" height="500"/>
+              <preferredSize width="260" height="300"/>
               <requestFocusEnabled value="false"/>
               <verifyInputWhenFocusTarget value="false"/>
-              <verticalScrollBarPolicy value="21"/>
+              <verticalScrollBarPolicy value="20"/>
               <visible value="true"/>
               <wheelScrollingEnabled value="true"/>
             </properties>
-            <border type="none"/>
+            <border type="line"/>
             <children>
               <component id="84c7a" class="javax.swing.JList" binding="displayTaskTitle">
                 <constraints/>
                 <properties>
-                  <preferredSize width="100" height="500"/>
+                  <enabled value="true"/>
+                  <font name="JetBrains Mono" size="12" style="0"/>
+                  <preferredSize width="240" height="280"/>
+                  <visibleRowCount value="15"/>
                 </properties>
               </component>
             </children>
@@ -122,18 +128,25 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <preferredSize width="100" height="500"/>
+              <font name="JetBrains Mono" size="12" style="0"/>
+              <horizontalScrollBarPolicy value="30"/>
+              <opaque value="false"/>
+              <preferredSize width="90" height="300"/>
               <verticalScrollBarPolicy value="20"/>
               <visible value="true"/>
+              <wheelScrollingEnabled value="true"/>
             </properties>
-            <border type="none"/>
+            <border type="line"/>
             <children>
               <component id="fdd0" class="javax.swing.JList" binding="displayTaskDate">
                 <constraints/>
                 <properties>
                   <enabled value="false"/>
+                  <font name="JetBrains Mono" size="12" style="0"/>
+                  <layoutOrientation value="0"/>
                   <model/>
-                  <preferredSize width="50" height="300"/>
+                  <preferredSize width="80" height="280"/>
+                  <visibleRowCount value="15"/>
                 </properties>
               </component>
             </children>

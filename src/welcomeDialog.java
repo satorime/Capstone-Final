@@ -17,8 +17,8 @@ public class welcomeDialog extends JFrame{
         getStartedButton.addActionListener(e -> {
             dispose();
             ToDoList taskEase = new ToDoList();
-            taskEase.setSize(650, 750);
-            taskEase.setTitle("TaskEase");
+            taskEase.setSize(450, 540);
+            taskEase.setTitle("TaskEase - Main");
             taskEase.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             taskEase.setVisible(true);
 
