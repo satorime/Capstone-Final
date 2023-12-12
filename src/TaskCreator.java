@@ -101,12 +101,10 @@ public class TaskCreator extends JFrame {
     }
 
     public static ToDoList.YourTaskClass getTask() {
-
         return task;
     }
 
     public static void setTask(ToDoList.YourTaskClass task) {
-
         TaskCreator.task = task;
     }
 
