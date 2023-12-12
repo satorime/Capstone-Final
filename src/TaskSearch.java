@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class TaskSearch extends ToDoList {
+public class TaskSearch extends JFrame {
     private JPanel jpanel;
     private JTextField taskTitleInput;
     private JButton searchButton;
@@ -78,7 +78,7 @@ public class TaskSearch extends ToDoList {
 
     private int findTaskIndexByTitle(String searchTitle) {
         for (int i = 0; i < ToDoList.tasks.size(); i++) {
-            YourTaskClass task = ToDoList.tasks.get(i);
+            ToDoList.YourTaskClass task = ToDoList.tasks.get(i);
             if (task.getTaskName().equalsIgnoreCase(searchTitle)) {
                 return i;
             }

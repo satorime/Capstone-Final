@@ -37,7 +37,7 @@ public class TaskCreator extends JFrame {
                 try {
                     int selectedDay = Integer.parseInt(Objects.requireNonNull(daysBox.getSelectedItem()).toString());
                     int selectedYear = Integer.parseInt(Objects.requireNonNull(yearsBox.getSelectedItem()).toString());
-                    int selectedMonth = monthsBox.getSelectedIndex();  // Add 1 to get the correct month
+                    int selectedMonth = monthsBox.getSelectedIndex() + 1;  // Add 1 to get the correct month
                     String taskDate = String.format("%02d - %02d - %d", selectedDay, selectedMonth, selectedYear);
                     String taskTitleText = taskTitleField.getText().trim();
                     String taskDescriptionText = taskDescriptionArea.getText().trim();
@@ -117,7 +117,7 @@ public class TaskCreator extends JFrame {
         }
     }
 
-     public void clearMemory() {
+    public void clearMemory() {
         taskTitleField.setText("");
         taskDescriptionArea.setText("");
         daysBox.setSelectedIndex(0);
