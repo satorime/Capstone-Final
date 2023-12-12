@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class TaskOpener extends ToDoList {
+public class TaskOpener extends JFrame {
     private JTextField taskTitleField;
     private JComboBox daysBox;
     private JComboBox monthsBox;
@@ -18,7 +18,7 @@ public class TaskOpener extends ToDoList {
     private JPanel jpanel;
     private JLabel taskDescription;
 
-    public TaskOpener(YourTaskClass task, ToDoList parentFrame) {
+    public TaskOpener(ToDoList.YourTaskClass task, ToDoList parentFrame) {
         setContentPane(jpanel);
 
         Border border = BorderFactory.createLineBorder(Color.BLACK);
@@ -37,6 +37,23 @@ public class TaskOpener extends ToDoList {
         daysBox.setSelectedIndex(day);
         monthsBox.setSelectedIndex(month);
         yearsBox.setSelectedItem(String.valueOf(year));
+
+        // wrong pani tarong ra nako ni later
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                ToDoList taskEase = new ToDoList();
+                taskEase.setSize(460, 545);
+                taskEase.setTitle("TaskEase - Main");
+                taskEase.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                taskEase.setVisible(true);
+
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                int x = (screenSize.width - taskEase.getWidth()) / 2;
+                int y = (screenSize.height - taskEase.getHeight()) / 2;
+                taskEase.setLocation(x, y);
+            }
+        });
 
         saveButton.addActionListener(new ActionListener() {
             @Override
@@ -88,7 +105,7 @@ public class TaskOpener extends ToDoList {
         closeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                clearMemory(taskTitleField, taskDescriptionArea, monthsBox, daysBox, yearsBox);
+                clearMemory();
                 dispose();
 
                 ToDoList taskEase = new ToDoList();
@@ -105,16 +122,24 @@ public class TaskOpener extends ToDoList {
         });
     }
 
+    private void clearMemory() {
+        taskTitleField.setText("");
+        taskDescriptionArea.setText("");
+        daysBox.setSelectedIndex(0);
+        monthsBox.setSelectedIndex(0);
+        yearsBox.setSelectedIndex(0);
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                YourTaskClass dummyTask = new YourTaskClass("Dummy Task", "Dummy Description", "01 - 01 - 2023");
+                ToDoList.YourTaskClass dummyTask = new ToDoList.YourTaskClass("Dummy Task", "Dummy Description", "01 - 01 - 2023");
                 ToDoList parentFrame = new ToDoList();
 
                 TaskOpener OpenFile = new TaskOpener(dummyTask, parentFrame);
                 OpenFile.setSize(480, 470);
                 OpenFile.setTitle("TaskEase - Help Section");
-                OpenFile.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                OpenFile.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 OpenFile.setVisible(true);
 
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

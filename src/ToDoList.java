@@ -6,13 +6,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 
-public class ToDoList extends YourTaskClass {
+public class ToDoList extends JFrame {
     private JPanel jpanel;
     private JButton addTaskButton;
     private JButton deleteTaskButton;
@@ -32,7 +29,6 @@ public class ToDoList extends YourTaskClass {
     private static final String FILE_PATH = "tasks.txt";
 
     public ToDoList() {
-        super(null,null,null);
         setContentPane(jpanel);
 
         // Create DefaultListModel for task titles and dates
@@ -203,13 +199,12 @@ public class ToDoList extends YourTaskClass {
                 }
             }
 
-//            Collections.sort(tasks);
-//
-//            for (YourTaskClass t : tasks) {
-//                taskTitleListModel.addElement(t.getTaskName());
-//                taskDateListModel.addElement(t.getTaskDate());
-//            }
-            sortByDates(tasks);
+            Collections.sort(tasks);
+
+            for (YourTaskClass t : tasks) {
+                taskTitleListModel.addElement(t.getTaskName());
+                taskDateListModel.addElement(t.getTaskDate());
+            }
 
             repaint();
 
@@ -240,52 +235,6 @@ public class ToDoList extends YourTaskClass {
         taskDateListModel.addElement(date);
     }
 
-    public void clearMemory(JTextField taskTitleField, JTextArea taskDescriptionArea, JComboBox monthsBox, JComboBox daysBox, JComboBox yearsBox) {
-        taskTitleField.setText("");
-        taskDescriptionArea.setText("");
-        daysBox.setSelectedIndex(0);
-        monthsBox.setSelectedIndex(0);
-        yearsBox.setSelectedIndex(0);
-    }
-
-public void sortByDates(ArrayList<YourTaskClass> tasks) {
-    Collections.sort(tasks);
-
-    for (YourTaskClass t : tasks) {
-        taskTitleListModel.addElement(t.getTaskName());
-        taskDateListModel.addElement(t.getTaskDate());
-    }
-}
-
-    public void dateChecker(ArrayList<YourTaskClass> tasks) {
-        int ctr = 0;
-        LocalDateTime now = LocalDateTime.now();
-
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String formattedDate = now.format(dateFormatter);
-
-        LocalDate currentDate = LocalDate.parse(formattedDate);
-
-        int currDate = currentDate.getDayOfMonth();
-        int currMonth = currentDate.getMonth().getValue();
-        int currYear = currentDate.getYear();
-
-        int fullDateCurrent = (currYear*10000)+(currMonth*100)+(currDate);
-
-        for(YourTaskClass t : tasks) {
-            System.out.println("task date: " + t.getIntTaskDate());
-            System.out.println("system date: " + fullDateCurrent);
-            if (t.getIntTaskDate() == fullDateCurrent) {
-                ctr++;
-            }
-        }
-        if(ctr == 1) {
-            JOptionPane.showInternalMessageDialog(null,"You have a task due today!");
-        } else if(ctr > 1) {
-            JOptionPane.showInternalMessageDialog(null,"You have " + ctr + " tasks due today!");
-        }
-    }
-
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -299,8 +248,70 @@ public void sortByDates(ArrayList<YourTaskClass> tasks) {
                 int x = (screenSize.width - taskEase.getWidth()) / 2;
                 int y = (screenSize.height - taskEase.getHeight()) / 2;
                 taskEase.setLocation(x, y);
-                taskEase.dateChecker(tasks);
             }
         });
+    }
+
+    public static class YourTaskClass implements Comparable<YourTaskClass> {
+        private String taskName;
+        private String taskDescription;
+        private String taskDate;
+        private int intTaskDate;
+
+        public YourTaskClass(String taskName, String taskDescription, String taskDate) {
+            this.taskName = taskName;
+            this.taskDescription = taskDescription;
+            this.taskDate = taskDate;
+        }
+        public void setIntTaskDate() {
+            try {
+                String[] date = taskDate.split(" - ");
+                int day = Integer.parseInt(date[0]);
+                int month = Integer.parseInt(date[1]);
+                int year = Integer.parseInt(date[2]);
+
+                intTaskDate = (year * 10000) + (month * 100) + day;
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public String getTaskName() {
+            return taskName;
+        }
+
+        public String getTaskDescription() {
+            return taskDescription;
+        }
+
+        public String getTaskDate() {
+            return taskDate;
+        }
+
+        @Override
+        public String toString() {
+            return taskName;
+        }
+
+        public int compareTo(YourTaskClass o) {
+            return Integer.compare(this.getIntTaskDate(), o.getIntTaskDate());
+        }
+
+        public int getIntTaskDate() {
+            return intTaskDate;
+        }
+
+        public void setTaskName(String taskName) {
+            this.taskName = taskName;
+        }
+
+        public void setTaskDescription(String taskDescription) {
+            this.taskDescription = taskDescription;
+        }
+
+        public void setTaskDate(String taskDate) {
+            this.taskDate = taskDate;
+            setIntTaskDate();
+        }
     }
 }
