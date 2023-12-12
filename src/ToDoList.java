@@ -6,6 +6,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 
@@ -230,9 +233,37 @@ public class ToDoList extends JFrame {
     }
 
     protected void updateTaskDisplay(String title, String date) {
-        // Add task to the list models
+        // Add ang mga task sa list models
         taskTitleListModel.addElement(title);
         taskDateListModel.addElement(date);
+    }
+
+    public void dateChecker(ArrayList<YourTaskClass> tasks) {
+        int ctr = 0;
+        LocalDateTime now = LocalDateTime.now();
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = now.format(dateFormatter);
+
+        LocalDate currentDate = LocalDate.parse(formattedDate);
+
+        int currDate = currentDate.getDayOfMonth();
+        int currMonth = currentDate.getMonth().getValue();
+        int currYear = currentDate.getYear();
+
+        int fullDateCurrent = (currYear*10000)+(currMonth*100)+(currDate);
+
+        for(YourTaskClass t : tasks) {
+            if (t.getIntTaskDate() == fullDateCurrent) {
+                ctr++;
+            }
+        }
+
+        if(ctr == 1) {
+            JOptionPane.showInternalMessageDialog(null,"You have a task due today!");
+        } else if(ctr > 1) {
+            JOptionPane.showInternalMessageDialog(null,"You have " + ctr + " tasks due today!");
+        }
     }
 
     public static void main(String[] args) {
@@ -248,6 +279,7 @@ public class ToDoList extends JFrame {
                 int x = (screenSize.width - taskEase.getWidth()) / 2;
                 int y = (screenSize.height - taskEase.getHeight()) / 2;
                 taskEase.setLocation(x, y);
+                taskEase.dateChecker(tasks);
             }
         });
     }
