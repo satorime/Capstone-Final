@@ -173,10 +173,8 @@ public class ToDoList extends JFrame {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
             for (YourTaskClass task : tasks) {
                 String desc = task.getTaskDescription();
-                desc = desc.replace("\n", ";");
 
-//                System.out.println(desc);
-                writer.write(task.getTaskName() + "|" + desc + "|" + task.getTaskDate() );
+                writer.write(task.getTaskName() + "|" + desc + "|" + task.getTaskDate());
                 writer.newLine();
             }
         } catch (IOException e) {

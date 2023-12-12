@@ -38,23 +38,6 @@ public class TaskOpener extends JFrame {
         monthsBox.setSelectedIndex(month);
         yearsBox.setSelectedItem(String.valueOf(year));
 
-        // wrong pani tarong ra nako ni later
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                ToDoList taskEase = new ToDoList();
-                taskEase.setSize(460, 545);
-                taskEase.setTitle("TaskEase - Main");
-                taskEase.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                taskEase.setVisible(true);
-
-                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                int x = (screenSize.width - taskEase.getWidth()) / 2;
-                int y = (screenSize.height - taskEase.getHeight()) / 2;
-                taskEase.setLocation(x, y);
-            }
-        });
-
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -139,7 +122,7 @@ public class TaskOpener extends JFrame {
                 TaskOpener OpenFile = new TaskOpener(dummyTask, parentFrame);
                 OpenFile.setSize(480, 470);
                 OpenFile.setTitle("TaskEase - Help Section");
-                OpenFile.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                OpenFile.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 OpenFile.setVisible(true);
 
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

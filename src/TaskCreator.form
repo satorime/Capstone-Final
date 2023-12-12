@@ -259,17 +259,6 @@
           <text value="CANCEL"/>
         </properties>
       </component>
-      <component id="cf793" class="javax.swing.JTextArea" binding="taskDescriptionArea">
-        <constraints>
-          <grid row="11" column="1" row-span="9" col-span="7" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-          <gridbag weightx="0.0" weighty="0.0"/>
-        </constraints>
-        <properties>
-          <preferredSize width="100" height="180"/>
-        </properties>
-      </component>
       <grid id="f374a" layout-manager="GridBagLayout">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="7" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -290,6 +279,28 @@
           </component>
         </children>
       </grid>
+      <scrollpane id="74533">
+        <constraints>
+          <grid row="11" column="1" row-span="9" col-span="7" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <verticalScrollBarPolicy value="22"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="cf793" class="javax.swing.JTextArea" binding="taskDescriptionArea">
+            <constraints/>
+            <properties>
+              <lineWrap value="true"/>
+              <preferredSize width="100" height="180"/>
+              <rows value="0"/>
+              <text value=""/>
+              <wrapStyleWord value="true"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
     </children>
   </grid>
 </form>
