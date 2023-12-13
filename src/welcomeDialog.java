@@ -26,6 +26,7 @@ public class welcomeDialog extends JFrame{
             int x = (screenSize.width - taskEase.getWidth()) / 2;
             int y = (screenSize.height - taskEase.getHeight()) / 2;
             taskEase.setLocation(x, y);
+            taskEase.dateChecker(ToDoList.tasks);
         });
     }
 
