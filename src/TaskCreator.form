@@ -285,7 +285,8 @@
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
-          <verticalScrollBarPolicy value="22"/>
+          <preferredSize width="100" height="180"/>
+          <verticalScrollBarPolicy value="20"/>
         </properties>
         <border type="none"/>
         <children>
@@ -293,8 +294,8 @@
             <constraints/>
             <properties>
               <lineWrap value="true"/>
-              <preferredSize width="100" height="180"/>
-              <rows value="0"/>
+              <preferredSize width="100" height="900"/>
+              <rows value="50"/>
               <text value=""/>
               <wrapStyleWord value="true"/>
             </properties>

@@ -49,7 +49,7 @@ public class ToDoList extends JFrame {
                 TaskCreator taskCreatorFrame = new TaskCreator(ToDoList.this);
                 taskCreatorFrame.setSize(480, 470);
                 taskCreatorFrame.setTitle("TaskEase - Task Creator");
-                taskCreatorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                taskCreatorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 taskCreatorFrame.setVisible(true);
 
                 YourTaskClass newTask = TaskCreator.getTask();
@@ -116,7 +116,7 @@ public class ToDoList extends JFrame {
                 HelpSection helpSection = new HelpSection();
                 helpSection.setSize(620, 590);
                 helpSection.setTitle("TaskEase - Help Section");
-                helpSection.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                helpSection.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 helpSection.setVisible(true);
 
                 // para nig run mo display sa tunga sa screen ang GUI
@@ -139,7 +139,7 @@ public class ToDoList extends JFrame {
                     TaskOpener taskOpener = new TaskOpener(selectedTask, ToDoList.this);
                     taskOpener.setSize(480, 470);
                     taskOpener.setTitle("TaskEase - Task Opener");
-                    taskOpener.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    taskOpener.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     taskOpener.setVisible(true);
 
                     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -274,7 +274,7 @@ public class ToDoList extends JFrame {
                 ToDoList taskEase = new ToDoList();
                 taskEase.setSize(460, 545);
                 taskEase.setTitle("TaskEase - Main");
-                taskEase.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                taskEase.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
                 taskEase.addWindowListener(new WindowAdapter() {
                     @Override

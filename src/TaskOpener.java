@@ -45,7 +45,7 @@ public class TaskOpener extends JFrame {
                 ToDoList taskEase = new ToDoList();
                 taskEase.setSize(460, 545);
                 taskEase.setTitle("TaskEase - Main");
-                taskEase.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                taskEase.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 taskEase.setVisible(true);
 
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -66,16 +66,17 @@ public class TaskOpener extends JFrame {
                 parentFrame.saveTasksToFile(ToDoList.tasks);
 
                 dispose();
-                ToDoList taskEase = new ToDoList();
-                taskEase.setSize(450, 540);
-                taskEase.setTitle("TaskEase - Main");
-                taskEase.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                taskEase.setVisible(true);
 
-                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                int x = (screenSize.width - taskEase.getWidth()) / 2;
-                int y = (screenSize.height - taskEase.getHeight()) / 2;
-                taskEase.setLocation(x, y);
+                //ToDoList taskEase = new ToDoList();
+                //taskEase.setSize(450, 540);
+                //taskEase.setTitle("TaskEase - Main");
+                //taskEase.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                //taskEase.setVisible(true);
+
+                //Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                //int x = (screenSize.width - taskEase.getWidth()) / 2;
+                //int y = (screenSize.height - taskEase.getHeight()) / 2;
+                //taskEase.setLocation(x, y);
             }
         });
 
@@ -91,7 +92,7 @@ public class TaskOpener extends JFrame {
                 ToDoList taskEase = new ToDoList();
                 taskEase.setSize(460, 545);
                 taskEase.setTitle("TaskEase - Main");
-                taskEase.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                taskEase.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 taskEase.setVisible(true);
 
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -111,7 +112,7 @@ public class TaskOpener extends JFrame {
                 ToDoList taskEase = new ToDoList();
                 taskEase.setSize(460, 545);
                 taskEase.setTitle("TaskEase - Main");
-                taskEase.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                taskEase.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 taskEase.setVisible(true);
 
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -139,7 +140,7 @@ public class TaskOpener extends JFrame {
                 TaskOpener OpenFile = new TaskOpener(dummyTask, parentFrame);
                 OpenFile.setSize(480, 470);
                 OpenFile.setTitle("TaskEase - Help Section");
-                OpenFile.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                OpenFile.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 OpenFile.setVisible(true);
 
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

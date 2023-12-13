@@ -3,6 +3,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.*;
 import java.util.Objects;
 
@@ -30,6 +32,22 @@ public class TaskCreator extends JFrame {
         Border compoundBorder = BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(5, 5, 5, 5));
         taskTitleField.setBorder(compoundBorder);
         taskDescriptionArea.setBorder(compoundBorder);
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                ToDoList taskEase = new ToDoList();
+                taskEase.setSize(460, 545);
+                taskEase.setTitle("TaskEase - Main");
+                taskEase.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                taskEase.setVisible(true);
+
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                int x = (screenSize.width - taskEase.getWidth()) / 2;
+                int y = (screenSize.height - taskEase.getHeight()) / 2;
+                taskEase.setLocation(x, y);
+            }
+        });
 
         createTaskButton.addActionListener(new ActionListener() {
             @Override
@@ -60,7 +78,7 @@ public class TaskCreator extends JFrame {
                     ToDoList taskEase = new ToDoList();
                     taskEase.setSize(460, 545);
                     taskEase.setTitle("TaskEase - Main");
-                    taskEase.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    taskEase.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     taskEase.setVisible(true);
 
                     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -89,7 +107,7 @@ public class TaskCreator extends JFrame {
                 ToDoList taskEase = new ToDoList();
                 taskEase.setSize(460, 545);
                 taskEase.setTitle("TaskEase - Main");
-                taskEase.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                taskEase.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 taskEase.setVisible(true);
 
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -132,7 +150,7 @@ public class TaskCreator extends JFrame {
                 TaskCreator createTask = new TaskCreator(taskEase);
                 createTask.setSize(480, 470);
                 createTask.setTitle("TaskEase - Task Creator");
-                createTask.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                createTask.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 createTask.setVisible(true);
 
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
